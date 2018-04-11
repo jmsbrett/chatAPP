@@ -3,5 +3,5 @@
 </div>
 
 
-<input [(ngModel)]="message"/>
+<input [(ngModel)]="message" (keyup)="event.keyCode == 13 && sendMessage()" />
 <button (click)="sendMessage()">Send</button>
