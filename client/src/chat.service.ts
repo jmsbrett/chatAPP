@@ -1,4 +1,5 @@
 import * as io from 'socket.io-client';
+import { Observable } from 'rxjs/Observable';
 
 
 
@@ -11,8 +12,17 @@ export class ChatService {
    }
     
 
-  // public sendMessage(message) {
-  //   this.socket.emit('new-message', message);
-    // or this.io.emit('new-message', message);
-  // } 
+  public sendMessage(message) {
+    this.socket.emit('new-message', message);
+    // this.io.emit('new-message', message);
+  } 
+
+  public getMessages = () => {
+    return Observable.create((observer) => {
+      this.socket.on('new-message', (message) => {
+        observer.next(message);
+      });
+    });
+  }
+
 }

@@ -7,7 +7,23 @@ import { ChatService } from '../chat.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'APP WORKS';
+  message: string;
+  messages: string[] = [];
   
-  constructor(chatService: ChatService) { }
+  constructor(private chatService: ChatService) {
+
+   }
+
+   sendMessage() {
+     this.chatService.sendMessage(this.message);
+     this.message = '';
+   }
+
+   ngOnInit() {
+     this.chatService
+      .getMessages()
+      .subscribe((message: string) => {
+        this.messages.push(message)
+      })
+   }
 }
