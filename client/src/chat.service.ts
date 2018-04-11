@@ -14,7 +14,6 @@ export class ChatService {
 
   public sendMessage(message) {
     this.socket.emit('new-message', message);
-    // this.io.emit('new-message', message);
   } 
 
   public getMessages = () => {
